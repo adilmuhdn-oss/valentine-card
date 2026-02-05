@@ -1,0 +1,854 @@
+/* ================= RESET ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100vh;
+  font-family: 'Quicksand', sans-serif;
+  overflow: hidden;
+}
+
+
+
+/* ================= SCREEN SYSTEM ================= */
+
+/* IMPORTANT:
+   hidden by default */
+.screen {
+  display: none;
+
+  width: 100vw;
+  height: 100vh;
+
+  position: relative;
+
+  /* flex properties only (NOT display:flex here) */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: url("images/background image.png") no-repeat center center;
+  background-size: cover;
+}
+
+
+/* ONLY active screen is visible */
+.screen.active {
+  display: flex;
+}
+
+
+
+/* ================= TITLE ================= */
+
+
+.title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 48px;
+  font-weight: 500;
+  color: #ff6f91;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 12px rgba(255, 111, 145, 0.25);
+}
+
+.title {
+  margin-top: -100px; /* move upward */
+  margin-bottom: 30px;
+}
+
+.title {
+  margin-top: -60px;
+
+  opacity: 0;
+  transform: translateY(-20px);
+
+  animation: titleFade 0.8s ease forwards;
+  animation-delay: 1s; /* ← delay time */
+}
+@keyframes titleFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ================= KITTY AREA ================= */
+
+.kitty-container {
+  position: relative;
+  width: 420px;
+  height: 360px;
+}
+
+
+
+/* ================= WALKING KITTY ================= */
+
+.postman {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;   /* SAME SIZE */
+}
+
+
+
+.postman {
+  animation:
+    walk 3s forwards,
+    bob 0.5s infinite alternate ease-in-out;
+}
+
+
+#screen1 {
+  animation: bgFloat 6s ease-in-out infinite alternate;
+}
+
+@keyframes bgFloat {
+  from { background-size: 100%; }
+  to   { background-size: 105%; }
+}
+
+@keyframes walk {
+  0%   { left: -850px; transform: scale(0.6); }
+  100% { left: -20px; transform: scale(1); }
+}
+
+@keyframes bob {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+
+
+/* ================= BIG KITTY ================= */
+
+.big-kitty {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-45%);
+  width: 280px;   /* SAME SIZE */
+
+  pointer-events: none;
+}
+
+.big-kitty {
+  position: absolute;
+  bottom: 0;
+  left: 120px;   /* SAME final walk position */
+}
+
+
+/* ================= LETTER HITBOX ================= */
+
+.mail-hitbox {
+  position: absolute;
+
+  /* aligned to envelope */
+  top: 190px;
+  left: 40px;
+
+  width: 95px;
+  height: 55px;
+
+  background: transparent; /* invisible */
+  cursor: pointer;
+
+  z-index: 9999;
+}
+
+
+
+
+/* ================= SPEECH BUBBLE ================= */
+
+.hint {
+  position: absolute;
+  top: 20px;
+  left: 140px;
+
+  background: white;
+  color: #ff6f91;
+
+  padding: 10px 16px;
+  border-radius: 25px;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+
+  white-space: nowrap;
+
+  pointer-events: none; /* ⭐ IMPORTANT */
+
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+}
+
+
+
+.hint::after {
+  content: "";
+  position: absolute;
+
+  bottom: -6px;
+  left: 30px;
+
+  width: 12px;
+  height: 12px;
+
+  background: white;
+
+  transform: rotate(45deg);
+}
+
+.hint {
+  animation: bubbleFloat 2s ease-in-out infinite;
+}
+
+.hint {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+@keyframes bubbleFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.hint {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+  pointer-events: none; /* can't click accidentally */
+}
+
+.hint.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+
+
+
+
+/* ================= HELPERS ================= */
+
+.hidden {
+  display: none;
+}
+
+
+/* ================= ENVELOPE (CLEAN + STABLE) ================= */
+
+/* =========================================
+   SCREEN 2 – PERFECT ENVELOPE (CLEAN BUILD)
+========================================= */
+/* ============================= */
+/* SCREEN 2 – Envelope Animation */
+/* ============================= */
+
+#screen2 {
+  justify-content: center;
+  align-items: center;
+/*background: linear-gradient(#ffeaf4, #ffd9ec);*/
+}
+
+
+/* Envelope container */
+/* Envelope container */
+.envelope {
+  position: relative;
+  width: 320px;
+  height: 200px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.envelope:hover {
+  transform: scale(1.05);
+}
+
+/* Body (main envelope) */
+.body {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to bottom right, transparent calc(50% - 3px), #5a3e2e calc(50% - 1px), #5a3e2e calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(to bottom left, transparent calc(50% - 3px), #5a3e2e calc(50% - 1px), #5a3e2e calc(50% + 1px), transparent calc(50% + 1px)),
+    #fff7e6;
+  border: 8px solid #5a3e2b;
+  border-radius: 12px;
+  z-index: 5;
+  transition: z-index 0s 0.3s;
+}
+
+/* Paper (letter inside) */
+/* Paper (letter inside) */
+.paper {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  height: 140px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s ease, z-index 0s 0.3s;
+  z-index: 2;
+  overflow: auto; /* Change to 'auto' for scrolling, or 'visible' to see all text */
+}
+
+/* Message text */
+.msg {
+  font-size: 18px; /* Slightly smaller font */
+  color: #ff6f91;
+  font-weight: bold;
+  width: 90%; /* Don't take full width, leave some margin */
+  max-height: 120px; /* Limit height */
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Enable vertical scrolling if text is too long */
+ scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Flap (triangle) */
+.flap {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 110px solid #e6d3b8;
+  transform-origin: top center;
+  transition: transform 0.6s ease, z-index 0s 0.3s;
+  z-index: 6; /* Above body when closed */
+}
+
+/* Heart decoration */
+.heart {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 36px;
+  z-index: 7; /* Always on top */
+}
+
+.heart::after{
+  content:'';
+  position:absolute;
+
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%) scale(1);
+
+  width: 55px;
+  height: 55px;
+
+  border-radius:50%;
+  background: radial-gradient(circle, #ff6b9a88 0%, transparent 70%);
+
+  animation: heartGlowPulse 1.8s ease-in-out infinite;
+
+  z-index:-1;
+}
+
+@keyframes heartGlowPulse{
+  0%,100%{
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity:.35;
+  }
+  50%{
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity:.9;
+  }
+}
+
+
+
+
+/* Continue Button */
+.continue-btn {
+  position: absolute;
+  bottom: -180px;
+  left: 50px;
+  padding: 15px 50px;
+  background: #ff6f91;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 111, 145, 0.3);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.continue-btn {
+  opacity: 0;
+  transform: translateY(20px);
+
+  animation: continueFade 0.7s ease forwards;
+  animation-delay: 4.8s; /* ← delay time */
+}
+@keyframes continueFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.continue-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 111, 145, 0.5);
+}
+
+.continue-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== HEART STYLES ===== */
+.heart {
+  position: absolute;
+  font-size: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7;
+  /* NO transition here - we'll use animation instead */
+}
+
+.heart.floating {
+  animation: floatAway 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  z-index: 10000;
+}
+
+@keyframes floatAway {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: translate(-50%, -150px) scale(1.3) rotate(10deg);
+    opacity: 0.9;
+  }
+  60% {
+    transform: translate(-50%, -350px) scale(1.5) rotate(-5deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -600px) scale(2) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+/* ===== OPEN ANIMATION ===== */
+.envelope.open .body {
+  z-index: 1; /* Body goes to back */
+  transition: z-index 0s 0s; /* Immediate when opening */
+}
+
+.envelope.open .flap {
+  transform: translateX(-50%) rotateX(180deg);
+  z-index: 3; /* Flap goes behind paper */
+  transition: transform 0.6s ease, z-index 0s 0s; /* Immediate z-index change */
+}
+
+.envelope.open .paper {
+  transform: translate(-50%, -150px);
+  z-index: 10; /* Paper comes to front */
+  transition: transform 0.6s ease, z-index 0s 0s; /* Immediate z-index change */
+}
+
+
+.bg-hearts{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+
+
+.bg-hearts span{
+  position:absolute;
+  bottom:-20px;
+  font-size:18px;
+  opacity:.25;
+  animation: floatUp 10s linear forwards;
+}
+
+@keyframes floatUp{
+  to{ transform: translateY(-110vh); }
+}
+
+
+
+
+/* ===============================
+   SCREEN 3 — SUSPENSE
+   =============================== */
+
+/* ===============================
+   SCREEN 3 — SUSPENSE
+   =============================== */
+
+#screen3 {
+  background: linear-gradient(135deg, #ffd6e8 0%, #d7c4ca 50%, #ffd6e8 100%);
+
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.suspense-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.suspense-text {
+  font-size: 52px;
+  color: #ff6f91;
+  font-weight: bold;
+  margin: 30px 0;
+
+  opacity: 0;
+
+  animation: fadeInUp 1.5s ease-out forwards;
+
+  text-shadow: 3px 3px 6px rgba(255, 111, 145, 0.4);
+}
+
+.suspense-text.delay {
+  animation-delay: 1.5s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suspense-text {
+  font-family: 'Baloo 2', cursive;
+  font-size: 56px;
+  font-weight: 700;
+}
+
+
+/* ===============================
+   SCREEN 4 — QUESTION
+   =============================== */
+
+#screen4 {
+  /*background: linear-gradient(135deg, #fff0f6, #ffe4ec);*/
+}
+
+.question-box {
+  text-align: center;
+}
+
+.question-text {
+  font-size: 48px;
+  color: #ff6f91;
+  margin-bottom: 50px;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.btns button {
+  padding: 15px 45px;
+  margin: 15px;
+  font-size: 20px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+
+
+.yes-btn {
+  background: #ff6f91;
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 111, 145, 0.35);
+}
+
+.yes-btn:hover {
+  transform: scale(1.1);
+}
+
+
+/* NO button */
+.no-btn {
+  background: white;
+  color: #ff6f91;
+  border: 2px solid #ff6f91;
+}
+
+.no-btn:hover {
+  transform: scale(1.05);
+}
+
+
+.yes-btn {
+  position: relative;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #ff6f91;
+  }
+  to {
+    box-shadow: 0 0 25px #ff6f91, 0 0 50px #ffb6c1;
+  }
+}
+
+
+.yes-btn {
+  position: relative;
+  background: #ff6f91;
+  color: white;
+
+  animation: yesGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes yesGlow {
+  from {
+    box-shadow:
+      0 0 8px #ff6f91,
+      0 0 18px #ff6f91;
+  }
+  to {
+    box-shadow:
+      0 0 20px #ff8fb0,
+      0 0 40px #ff8fb0;
+  }
+}
+
+.question-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 55px;
+  color: #ff6f91;
+  text-shadow: 0 6px 18px rgba(255, 111, 145, 0.25);
+}
+
+.sparkle {
+  position: fixed;
+  font-size: 14px;
+  pointer-events: none;
+  animation: sparkleFloat 1s ease-out forwards;
+}
+
+@keyframes sparkleFloat {
+  from {
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(0,-30px) scale(0.6);
+    opacity: 0;
+  }
+}
+
+.yes-btn,
+.no-btn {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+/* 💥 shake before exploding */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+}
+
+/* 💥 explode */
+@keyframes explode {
+  0%   { transform: scale(1); opacity: 1; }
+  40%  { transform: scale(1.4); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.no-btn.explode {
+  animation:
+    shake 0.15s 3,
+    explode 0.5s forwards;
+}
+
+
+.heart-particle {
+  position: fixed;
+  font-size: 18px;
+  pointer-events: none;
+  animation: heartBurst 1s ease-out forwards;
+}
+
+@keyframes heartBurst {
+  from {
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(
+      calc(-50px + 100px * random()),
+      calc(-50px + 100px * random())
+    ) scale(0.5);
+    opacity: 0;
+  }
+}
+
+
+
+
+.heart-particle {
+  position: fixed;
+  font-size: 18px;
+  pointer-events: none;
+
+  animation: heartExplode 0.9s ease-out forwards;
+}
+
+@keyframes heartExplode {
+  from {
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--dx), var(--dy)) scale(0.6);
+    opacity: 0;
+  }
+}
+
+
+
+
+/* 💥 explode animation */
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.3) rotate(10deg);
+  }
+  60% {
+    transform: scale(0.8) rotate(-10deg);
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.no-btn.explode {
+  animation: explode 0.6s ease forwards;
+}
+
+
+/* ===============================
+   SCREEN 5 — CELEBRATION
+   =============================== */
+
+#screen5 {
+  background: linear-gradient(135deg, #fff0f6, #ffe4ec, #ffd6e8);
+  overflow: hidden;
+}
+
+/* message */
+.celebrate-box {
+  text-align: center;
+  z-index: 2;
+}
+
+.celebrate-text {
+  font-size: 64px;
+  color: #ff6f91;
+  animation: popIn 0.6s ease;
+}
+
+.celebrate-sub {
+  font-size: 24px;
+  margin-top: 15px;
+  color: #ff6f91;
+}
+
+/* pop animation */
+@keyframes popIn {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.confetti {
+  position: fixed;
+  font-size: 18px;
+  pointer-events: none;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-50px) rotate(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
