@@ -45,9 +45,13 @@ html, body {
 
 /* ================= TITLE ================= */
 
+#screen1 .title {
+  font-family: 'Fredoka', sans-serif;
+}
+
 
 .title {
-  font-family: 'Baloo 2', cursive;
+  /*font-family: 'Baloo 2', cursive; */
   font-size: 48px;
   font-weight: 500;
   color: #ff6f91;
@@ -537,6 +541,15 @@ html, body {
   text-align: center;
   padding: 40px;
 }
+
+
+#screen3 .suspense-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 48px;
+  color: #ff6f91;
+  text-align: center;
+}
+
 
 .suspense-text {
   font-size: 52px;
