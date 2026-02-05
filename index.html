@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Valentine's Day 💕</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/deco1.png">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+
+
+  
+</head>
+
+<audio id="bgMusic" loop>
+  <source src="images/boba-date.m4a.m4a" type="audio/mpeg">
+</audio>
+
+<body>
+
+  
+
+  <!-- =========================
+       SCREEN 1
+  ========================== -->
+  <section id="screen1" class="screen active">
+
+    <h1 class="title">You got a mail! 💌</h1>
+
+    <div class="kitty-container">
+
+      <!-- walking kitty -->
+      <img
+        src="images/walking mochi cat.png"
+        class="postman"
+        id="walkKitty"
+      >
+
+      <!-- big kitty -->
+      <img
+        src="images/postmaster mochi cat.png"
+        class="big-kitty hidden"
+        id="bigKitty"
+      >
+      
+      
+      <!-- ✅ CLICKABLE HITBOX (NOT hidden anymore) -->
+      <div class="mail-hitbox" id="mail"></div>
+
+      <!-- speech bubble -->
+      <div class="hint">
+        Click the letter 💌
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       SCREEN 2
+  ========================== -->
+ <!-- ===================== -->
+<!-- Screen 2 – Envelope -->
+<!-- ===================== -->
+<section id="screen2" class="screen">
+  <div class="bg-hearts"></div>
+  <div class="envelope" id="envelope">
+    
+    <!-- envelope base -->
+     <div class="body"></div>
+
+    <!-- letter that slides out -->
+    <div class="paper">
+      <p class="msg">Hi love,
+
+I just wanted to remind you how happy you make me.
+
+Every little moment with you,
+talking, laughing, even doing nothing together,
+somehow becomes my favorite part of the day.
+
+Being with you just makes life feel easier and lighter.
+Even the normal, everyday stuff feels nicer when you're around.
+Doing simple things together just feels comfortable and right.
+I really like the life we have together.
+You have this quiet way of making everything better without even trying.
+
+I’m really lucky to have you,
+and I’m so grateful for us.
+
+Thank you for being with me. I love you 💗
+
+</p>
+    </div>
+
+    <!-- flap that rotates -->
+    <div class="flap"></div>
+
+    <!-- cute decoration -->
+    <div class="heart">💖</div>
+    
+
+<button class="continue-btn">Continue ➜</button>
+
+  </div>
+
+</section>
+
+
+
+<!-- Screen 3: Suspense Question -->
+
+<section class="screen" id="screen3">
+  <div class="suspense-container">
+    <p class="suspense-text">Wait...</p>
+    <p class="suspense-text delay">There's something I want to ask you...</p>
+  </div>
+</section>
+
+
+<!-- =========================
+     SCREEN 4 — QUESTION
+========================= -->
+<section id="screen4" class="screen">
+
+  <div class="question-box">
+    <h2 class="question-text">
+      Will you be my Valentine? 💐
+    </h2>
+
+    <div class="btns">
+      <button id="yesBtn" class="yes-btn">YES </button>
+      <button id="noBtn" class="no-btn">NO </button>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SCREEN 5 — CELEBRATION
+========================= -->
+<section id="screen5" class="screen">
+
+  <div class="celebrate-box">
+    <h1 class="celebrate-text">Yesss🪻</h1>
+    <p class="celebrate-sub"><br>
+You have successfully registered
+for being with me forever <br>
+
+No cancellations.<br>
+No refunds.<br
+
+Thank you for choosing me 🌸</p>
+<br><br>
+<span style="font-size:18px; opacity:.7;">
+(I knew you'd click YES 😼)
+</span>
+
+  </div>
+
+  <!-- particles container -->
+  <div id="confetti-container"></div>
+
+</section>
+
+  <audio id="sparkleSfx" src="sounds/sparkle.mp3"></audio>
+  <audio id="clickSfx" src="sounds/pop-sound.mp3"></audio>
+  <audio id="noSfx" src="sounds/balloon-burst.mp3" preload="auto"></audio>
+  <audio id="yesSfx" src="sounds/tada-sound-effect_82hE6iQ8.mp3" preload="auto"></audio>
+  <audio id="mailSfx" src="sounds/cute jumb.mp3" preload="auto"></audio>
+
+
+
+
+  <div class="transition-overlay"></div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
